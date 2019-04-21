@@ -23,7 +23,8 @@ namespace Project.DotNet.Core.Api.Controllers
         public ResponseHandler FindAll()
         {
             var entities = _repository.GetAll();
-            return ResponseHandler.BuildResponse(entities, "v1", DateTime.Now, HttpStatusCode.OK, HttpContext.Response);
+            return ResponseHandler.BuildResponse(entities, "v1", 
+                DateTime.Now, HttpStatusCode.OK, HttpContext.Response);
         }
 
         [HttpGet("{id}")]
@@ -32,10 +33,12 @@ namespace Project.DotNet.Core.Api.Controllers
             var entity = _repository.GetById(id);
             if (entity == null)
             {
-                return ResponseHandler.BuildResponse("v1", "Objeto Não encontrado", DateTime.Now, HttpStatusCode.NotFound, HttpContext.Response);
+                return ResponseHandler.BuildResponse("v1", "Objeto Não encontrado", DateTime.Now,
+                    HttpStatusCode.NotFound, HttpContext.Response);
             }
 
-            return ResponseHandler.BuildResponse(entity, "v1", DateTime.Now, HttpStatusCode.OK, HttpContext.Response);
+            return ResponseHandler.BuildResponse(entity, "v1", 
+                DateTime.Now, HttpStatusCode.OK, HttpContext.Response);
         }
 
         [HttpPost]
@@ -47,11 +50,13 @@ namespace Project.DotNet.Core.Api.Controllers
 
             try {
                 _repository.Insert(Category);
-                return ResponseHandler.BuildResponse(Category, "v1", DateTime.Now, HttpStatusCode.Created, HttpContext.Response);
+                return ResponseHandler.BuildResponse(Category, "v1", DateTime.Now, 
+                    HttpStatusCode.Created, HttpContext.Response);
             }
             catch (Exception ex)
             {
-                return ResponseHandler.BuildResponse("v1", $"Erro ao Salvar exception: {ex.Message} ", DateTime.Now, HttpStatusCode.NotFound, HttpContext.Response);
+                return ResponseHandler.BuildResponse("v1", $"Erro ao Salvar exception: {ex.Message} ", 
+                    DateTime.Now, HttpStatusCode.NotFound, HttpContext.Response);
             }
         }
 
@@ -63,15 +68,18 @@ namespace Project.DotNet.Core.Api.Controllers
                 var entity = _repository.GetById(id);
                 if (entity == null)
                 {
-                    return ResponseHandler.BuildResponse("v1", "Objeto Não encontrado", DateTime.Now, HttpStatusCode.NotFound, HttpContext.Response);
+                    return ResponseHandler.BuildResponse("v1", "Objeto Não encontrado", DateTime.Now, 
+                        HttpStatusCode.NotFound, HttpContext.Response);
                 }
 
                 _repository.Update(Category);
-                return ResponseHandler.BuildResponse("v1", "Atualizado com sucesso!", DateTime.Now, HttpStatusCode.NoContent, HttpContext.Response);
+                return ResponseHandler.BuildResponse("v1", "Atualizado com sucesso!", DateTime.Now, 
+                    HttpStatusCode.NoContent, HttpContext.Response);
             }
             catch (Exception ex)
             {
-                return ResponseHandler.BuildResponse("v1", $"Erro ao atualizar exception: {ex.Message} ", DateTime.Now, HttpStatusCode.NotFound, HttpContext.Response);
+                return ResponseHandler.BuildResponse("v1", $"Erro ao atualizar exception: {ex.Message} ", 
+                    DateTime.Now, HttpStatusCode.NotFound, HttpContext.Response);
             }
         }
 
@@ -83,14 +91,17 @@ namespace Project.DotNet.Core.Api.Controllers
                 var entity = _repository.GetById(id);
                 if (entity == null)
                 {
-                    return ResponseHandler.BuildResponse("v1", "Objeto Não encontrado", DateTime.Now, HttpStatusCode.NotFound, HttpContext.Response);
+                    return ResponseHandler.BuildResponse("v1", "Objeto Não encontrado", 
+                        DateTime.Now, HttpStatusCode.NotFound, HttpContext.Response);
                 }
                 _repository.Delete(id);
-                return ResponseHandler.BuildResponse("v1", "Deletado com sucesso!", DateTime.Now, HttpStatusCode.NoContent, HttpContext.Response);
+                return ResponseHandler.BuildResponse("v1", "Deletado com sucesso!", 
+                    DateTime.Now, HttpStatusCode.NoContent, HttpContext.Response);
             }
             catch (Exception ex)
             {
-                return ResponseHandler.BuildResponse("v1", $"Erro ao deletar exception: {ex.Message} ", DateTime.Now, HttpStatusCode.NotFound, HttpContext.Response);
+                return ResponseHandler.BuildResponse("v1", $"Erro ao deletar exception: {ex.Message} ", 
+                    DateTime.Now, HttpStatusCode.NotFound, HttpContext.Response);
             }
         }
     }
