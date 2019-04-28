@@ -10,19 +10,19 @@ namespace Project.DotNet.Core.Api.Models
     /// </summary>
     public class ResponseHandler
     {
-        private ResponseHandler(dynamic data, string apiVersion, DateTime timestamp, HttpStatusCode statusCode)
+        private ResponseHandler(dynamic data, string apiVersion,HttpStatusCode statusCode)
         {
             Data = data;
             ApiVersion = apiVersion;
-            Timestamp = timestamp;
+            Timestamp = DateTime.Now;
             StatusCode = statusCode;
         }
 
-        private ResponseHandler(string apiVersion, string messages, DateTime timestamp, HttpStatusCode statusCode)
+        private ResponseHandler(string apiVersion, string messages,HttpStatusCode statusCode)
         {
             ApiVersion = apiVersion;
             Messages = messages;
-            Timestamp = timestamp;
+            Timestamp = DateTime.Now;
             StatusCode = statusCode;
         }
 
@@ -41,10 +41,10 @@ namespace Project.DotNet.Core.Api.Models
         /// <param name="statusCode"></param>
         /// <param name="response"></param>
         /// <returns></returns>
-        public static ResponseHandler BuildResponse(dynamic data, string apiVersion, DateTime timestamp, HttpStatusCode statusCode, HttpResponse response)
+        public static ResponseHandler BuildResponse(dynamic data, string apiVersion, HttpStatusCode statusCode, HttpResponse response)
         {
             response.StatusCode = (int)statusCode;
-            return new ResponseHandler(data, apiVersion, timestamp, statusCode);
+            return new ResponseHandler(data, apiVersion, statusCode);
         }
 
         /// <summary>
@@ -56,10 +56,10 @@ namespace Project.DotNet.Core.Api.Models
         /// <param name="statusCode"></param>
         /// <param name="response"></param>
         /// <returns></returns>
-        public static ResponseHandler BuildResponse(string apiVersion, string messages, DateTime timestamp, HttpStatusCode statusCode, HttpResponse response)
+        public static ResponseHandler BuildResponse(string apiVersion, string messages, HttpStatusCode statusCode, HttpResponse response)
         {
             response.StatusCode = (int)statusCode;
-            return new ResponseHandler(apiVersion, messages, timestamp, statusCode);
+            return new ResponseHandler(apiVersion, messages,statusCode);
         }
     }
 }
